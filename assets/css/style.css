@@ -1,6 +1,41 @@
+@font-face {
+	font-family: StarJedi;
+	src: url("fonts/starjedi.ttf") format('truetype');
+}
+
+@font-face {
+	font-family: StarJediHollow;
+	src: url(fonts/starjhol.ttf);
+}
+
+@font-face {
+	font-family: StarJediDoubleLine1;
+	src: url(fonts/stjldbl1.ttf);
+}
+
+@font-face {
+	font-family: StarJediDoubleLine2;
+	src: url(fonts/stjldbl2.ttf);
+}
+
+@font-face {
+	font-family: StarJediMono;
+	src: url(fonts/strjmono.ttf);
+}
+
+@font-face {
+	font-family: StarJediRounded;
+	src: url(fonts/star_jedi_rounded.ttf);
+}
+
 body {
-  font-family: Roboto, sans-serif;
+  font-family: 'VT323', monospace;
   color: white;
   background: url(../images/swbg.jpg) no-repeat center fixed;
 	background-size: cover;
+}
+
+h1 {
+	font-family: StarJedi, 'VT323', monospace;
+	color: white;
 }
