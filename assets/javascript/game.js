@@ -4,7 +4,8 @@ $(document).ready(function () {
 		name: "luke skywalker",
 		hp: 100,
 		image: "<img class='charCards' src='assets/images/luke.jpeg' alt='Luke Skywalker'>",
-		attackPwr: 5
+		attackPwr: 5,
+		counterAttackPower: 8
 	}
 
 	var lukeCard = "<figure class='charCards card' id='Lukie'>" + luke.image + "<figcaption>" + luke.name + "<br>hp: <span id='lukehp'>" + luke.hp + "</span></figcaption></figure>";
@@ -13,7 +14,8 @@ $(document).ready(function () {
 		name: "obi wan kenobi",
 		hp: 120,
 		image: "<img class='charCards' src='assets/images/obi.jpg' alt='Obi Wan Kenobi'>",
-		attackPwr: 8
+		attackPwr: 8,
+		counterAttackPower: 11
 	}
 
 	var obiCard = "<figure class='charCards card' id='Obidobi'>" + obi.image + "<figcaption>" + obi.name + "<br>hp: <span id='obihp'>" + obi.hp + "</span></figcaption></figure>";
@@ -22,7 +24,8 @@ $(document).ready(function () {
 		name: "darth vader",
 		hp: 150,
 		image: "<img class='charCards' src='assets/images/vader.jpg' alt='Darth Vader'>",
-		attackPwr: 20
+		attackPwr: 20,
+		counterAttackPower: 23
 	}
 
 	var vaderCard = "<figure class='charCards card' id='Vadie'>" + vader.image + "<figcaption>" + vader.name + "<br>hp: <span id='vaderhp'>" + vader.hp + "</span></figcaption></figure>";
@@ -31,7 +34,8 @@ $(document).ready(function () {
 		name: "darth sidious",
 		hp: 180,
 		image: "<img class='charCards' src='assets/images/sidious.jpg' alt='Darth Sidious'>",
-		attackPwr: 25
+		attackPwr: 25,
+		counterAttackPower: 28
 	}
 
 	var sidiousCard = "<figure class='charCards card' id='Siddy'>" + sidious.image + "<figcaption>" + sidious.name + "<br>hp: <span id='sidioushp'>" + sidious.hp + "</span></figcaption></figure>";
@@ -49,6 +53,7 @@ $(document).ready(function () {
 	var atkObjConvert;
 	var dfndObjConvert;
 	var winsCounter = 0;
+	var enemyDefeated = false;
 
 	function play() {
 
@@ -70,6 +75,7 @@ $(document).ready(function () {
 		sidious.hp = 180;
 		sidious.attackPwr = 25;
 		winsCounter = 0;
+		enemyDefeated = false;
 
 
 		$("#chooseArea").append(lukeCard);
@@ -121,7 +127,7 @@ $(document).ready(function () {
 				attacker();
 				console.log($(".chosenChar").attr('id') + " attacks for " + attackPower);
 				$("#attackerMsg").html("<p>" + atkObjConvert.name + " attacks for " + attackPower + " damage</p>");
-				atkObjConvert.attackPwr += 8;
+				atkObjConvert.attackPwr += atkObjConvert.attackPwr;
 				defender();
 				console.log($(".chosenEnemy").attr('id') + " defends for " + defendPower);
 				$("#defenderMsg").html("<p>" + dfndObjConvert.name + " defends for " + defendPower + " damage</p>");
@@ -146,6 +152,7 @@ $(document).ready(function () {
 					$(".chosenEnemy").html("<h3>loses!</h3>");
 					$("#attack").html("");
 					winsCounter++;
+					enemyDefeated = true;
 					if (winsCounter < 3) {
 						console.log("There are still enemies to defeat");
 						$("#battlEnd").html(nextEnemyButton);
@@ -161,7 +168,8 @@ $(document).ready(function () {
 						$("#enemy>.card").removeClass("chosenEnemy");
 						tryAgain();
 					}
-
+				} else if (enemyDefeated = true && atkObjConvert.hp <= 0) {
+					console.log("What? Negative HP?"); //not working
 				}
 			});
 
@@ -190,19 +198,19 @@ $(document).ready(function () {
 		function defender() {
 			if ($(".chosenEnemy").attr('id') === "Lukie") {
 				dfndObjConvert = luke;
-				defendPower = luke.attackPwr;
+				defendPower = luke.counterAttackPower;
 				dfndHP = $("#lukehp");
 			} else if ($(".chosenEnemy").attr('id') === "Obidobi") {
 				dfndObjConvert = obi;
-				defendPower = obi.attackPwr;
+				defendPower = obi.counterAttackPower;
 				dfndHP = $("#obihp");
 			} else if ($(".chosenEnemy").attr('id') === "Vadie") {
 				dfndObjConvert = vader;
-				defendPower = vader.attackPwr;
+				defendPower = vader.counterAttackPower;
 				dfndHP = $("#vaderhp");
 			} else if ($(".chosenEnemy").attr('id') === "Siddy") {
 				dfndObjConvert = sidious;
-				defendPower = sidious.attackPwr;
+				defendPower = sidious.counterAttackPower;
 				dfndHP = $("#sidioushp");
 			}
 		}
