@@ -4,8 +4,9 @@ $(document).ready(function () {
 		name: "luke skywalker",
 		hp: 100,
 		image: "<img class='charCards' src='assets/images/luke.jpeg' alt='Luke Skywalker'>",
-		attackPwr: 5,
-		counterAttackPower: 8
+		attackPwr: 7,
+		counterAttackPower: 6,
+		atkEnhance: 7
 	}
 
 	var lukeCard = "<figure class='charCards card' id='Lukie'>" + luke.image + "<figcaption>" + luke.name + "<br>hp: <span id='lukehp'>" + luke.hp + "</span></figcaption></figure>";
@@ -15,7 +16,8 @@ $(document).ready(function () {
 		hp: 120,
 		image: "<img class='charCards' src='assets/images/obi.jpg' alt='Obi Wan Kenobi'>",
 		attackPwr: 8,
-		counterAttackPower: 11
+		counterAttackPower: 9,
+		atkEnhance: 8
 	}
 
 	var obiCard = "<figure class='charCards card' id='Obidobi'>" + obi.image + "<figcaption>" + obi.name + "<br>hp: <span id='obihp'>" + obi.hp + "</span></figcaption></figure>";
@@ -24,8 +26,9 @@ $(document).ready(function () {
 		name: "darth vader",
 		hp: 150,
 		image: "<img class='charCards' src='assets/images/vader.jpg' alt='Darth Vader'>",
-		attackPwr: 20,
-		counterAttackPower: 23
+		attackPwr: 12,
+		counterAttackPower: 12,
+		atkEnhance: 12
 	}
 
 	var vaderCard = "<figure class='charCards card' id='Vadie'>" + vader.image + "<figcaption>" + vader.name + "<br>hp: <span id='vaderhp'>" + vader.hp + "</span></figcaption></figure>";
@@ -34,8 +37,9 @@ $(document).ready(function () {
 		name: "darth sidious",
 		hp: 180,
 		image: "<img class='charCards' src='assets/images/sidious.jpg' alt='Darth Sidious'>",
-		attackPwr: 25,
-		counterAttackPower: 28
+		attackPwr: 16,
+		counterAttackPower: 17,
+		atkEnhance: 16
 	}
 
 	var sidiousCard = "<figure class='charCards card' id='Siddy'>" + sidious.image + "<figcaption>" + sidious.name + "<br>hp: <span id='sidioushp'>" + sidious.hp + "</span></figcaption></figure>";
@@ -48,12 +52,31 @@ $(document).ready(function () {
 	var winnerButton = "<button class='btn btn-success' id='winnerBtn'>winner! play again?</button>";
 	var attackPower;
 	var atkHP;
+	var atkEnhance;
 	var dfndHP;
 	var defendPower;
 	var atkObjConvert;
 	var dfndObjConvert;
 	var winsCounter = 0;
 	var enemyDefeated = false;
+	var winSound;
+	var loseSound;
+
+	//Sound 
+	function sound(src) {
+		this.sound = document.createElement("audio");
+		this.sound.src = src;
+		this.sound.setAttribute("preload", "auto");
+		this.sound.setAttribute("controls", "none");
+		this.sound.style.display = "none";
+		document.body.appendChild(this.sound);
+		this.play = function () {
+			this.sound.play();
+		}
+		this.stop = function () {
+			this.sound.pause();
+		}
+	}
 
 	function play() {
 
@@ -76,6 +99,8 @@ $(document).ready(function () {
 		sidious.attackPwr = 25;
 		winsCounter = 0;
 		enemyDefeated = false;
+		winSound = new sound("assets/sounds/900-years.mp3");
+		loseSound = new sound("assets/sounds/i-am-your-father.mp3");
 
 
 		$("#chooseArea").append(lukeCard);
@@ -127,7 +152,7 @@ $(document).ready(function () {
 				attacker();
 				console.log($(".chosenChar").attr('id') + " attacks for " + attackPower);
 				$("#attackerMsg").html("<p>" + atkObjConvert.name + " attacks for " + attackPower + " damage</p>");
-				atkObjConvert.attackPwr += atkObjConvert.attackPwr;
+				atkObjConvert.attackPwr += atkObjConvert.atkEnhance;
 				defender();
 				console.log($(".chosenEnemy").attr('id') + " defends for " + defendPower);
 				$("#defenderMsg").html("<p>" + dfndObjConvert.name + " defends for " + defendPower + " damage</p>");
@@ -141,6 +166,7 @@ $(document).ready(function () {
 					console.log("You lose!");
 					$("#enemy>h3").html("enemy wins!");
 					$(".chosenChar").html("<h3>lose!</h3>");
+					loseSound.play();
 					$("#attack").html("");
 					$("#battlEnd").html(tryAgainButton);
 					$("#attackerMsg").html("");
@@ -149,6 +175,7 @@ $(document).ready(function () {
 				} else if (dfndObjConvert.hp <= 0) {
 					console.log("You win!");
 					$("#you>h3").html("you win!");
+					winSound.play();
 					$(".chosenEnemy").html("<h3>loses!</h3>");
 					$("#attack").html("");
 					winsCounter++;
@@ -168,7 +195,7 @@ $(document).ready(function () {
 						$("#enemy>.card").removeClass("chosenEnemy");
 						tryAgain();
 					}
-				} else if (enemyDefeated = true && atkObjConvert.hp <= 0) {
+				} else if (enemyDefeated == true && atkObjConvert.hp <= 0) {
 					console.log("What? Negative HP?"); //not working
 				}
 			});
