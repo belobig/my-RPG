@@ -1,11 +1,11 @@
 @font-face {
 	font-family: StarJedi;
-	src: url("fonts/Starjedi.ttf") format('truetype');
+	src: url("fonts/starjedi.ttf") format('truetype');
 }
 
 @font-face {
 	font-family: StarJediHollow;
-	src: url("fonts/Starjhol.ttf") format('truetype');
+	src: url("fonts/starjhol.ttf") format('truetype');
 }
 
 body {
