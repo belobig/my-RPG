@@ -1,35 +1,15 @@
 @font-face {
 	font-family: StarJedi;
-	src: url("fonts/starjedi.ttf") format('truetype');
+	src: url("fonts/Starjedi.ttf") format('truetype');
 }
 
 @font-face {
 	font-family: StarJediHollow;
-	src: url(fonts/starjhol.ttf);
-}
-
-@font-face {
-	font-family: StarJediDoubleLine1;
-	src: url(fonts/stjldbl1.ttf);
-}
-
-@font-face {
-	font-family: StarJediDoubleLine2;
-	src: url(fonts/stjldbl2.ttf);
-}
-
-@font-face {
-	font-family: StarJediMono;
-	src: url(fonts/strjmono.ttf);
-}
-
-@font-face {
-	font-family: StarJediRounded;
-	src: url(fonts/star_jedi_rounded.ttf);
+	src: url("fonts/Starjhol.ttf") format('truetype');
 }
 
 body {
-  font-family: 'VT323', monospace;
+  font-family: StarJedi, 'VT323', monospace;
   color: white;
   background: url(../images/swbg.jpg) no-repeat center fixed;
 	background-size: cover;
@@ -38,4 +18,38 @@ body {
 h1 {
 	font-family: StarJedi, 'VT323', monospace;
 	color: white;
+}
+
+h2 {
+	font-family: StarJediHollow, 'VT323', monospace;
+  color: white;
+}
+
+figure {
+	display: inline-block;
+	margin: 0 10px;
+}
+
+figcaption {
+	position: relative;
+	top: -50px;
+	width: 180px;
+	background: rgba(0, 0, 0, 0.3);
+	border: 1px solid black;
+	border-radius: 10px;
+	margin: auto;
+
+}
+
+.whtRndBrdr {
+	border: 2px solid white;
+	border-radius: 10px;
+	margin-bottom: 20px;
+	background: rgba(255, 255, 255, 0.2);
+	
+}
+
+.charCards {
+	width: 200px;
+	border-radius: 10px;
 }
