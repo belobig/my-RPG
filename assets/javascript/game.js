@@ -250,7 +250,7 @@ $(document).ready(function () {
 				$("#battlEnd").html("");
 				$("#you>h3").html("<h3>you</h3>");
 				$("#enemy").html("<h3>enemy</h3>");
-				addEnemies();
+				addEnemies;
 			});
 		}
 
